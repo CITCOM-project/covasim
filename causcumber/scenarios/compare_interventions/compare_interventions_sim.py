@@ -1,7 +1,6 @@
 import covasim as cv
-import time
+from causcumber.helper_functions import msim_to_csv
 
-start_time = time.time()
 """ Which intervention is more effective at reducing the cumulative number of infections? """
 base_pars = dict(
     pop_type='hybrid',
@@ -31,14 +30,11 @@ intervention_sims = [baseline_sims, testing_sims, contact_tracing_sims]
 # Combine multi-simulations into a single multi-simulation and run
 interventions_msims = []
 for intervention_sim in intervention_sims:
-    intervention_sim.run(n_runs=30)
+    intervention_sim.run(n_runs=1)
     intervention_sim.mean()
     interventions_msims.append(intervention_sim)
-    # Save results to excel for later causal analysis
-    intervention_sim.to_excel("./results/{}_results".format(str.lower(intervention_sim.label)))
+    msim_to_csv(intervention_sim, str.lower(intervention_sim.label))
 
 # View plots
 merged_intervention_msims = cv.MultiSim.merge(interventions_msims, base=True)
 merged_intervention_msims.plot(color_by_sim=True)
-end_time = time.time()
-print("Run time: {}".format(end_time - start_time))
