@@ -37,7 +37,7 @@ intervention_sims = [baseline_sims, testing_sims, contact_tracing_sims]
 # Combine multi-simulations into a single multi-simulation and run
 interventions_msims = []
 for intervention_sim in intervention_sims:
-    intervention_sim.run(n_runs=1)
+    intervention_sim.run(n_runs=10)
     intervention_sim.mean()
     interventions_msims.append(intervention_sim)
     msim_to_csv(intervention_sim, str.lower(intervention_sim.label))
