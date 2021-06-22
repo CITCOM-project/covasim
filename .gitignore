@@ -144,3 +144,6 @@ node_modules
 
 # Causcumber venv
 causcumber/causcumber/
+
+# Causcumber results
+causcumber/scenarios/*/results/
