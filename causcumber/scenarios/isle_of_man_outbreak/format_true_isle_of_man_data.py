@@ -32,8 +32,7 @@ def plot_from_df(covid_19_df, title, output_png_path, start_date=None, end_date=
     if end_date:
         end_date = dt.datetime.strptime(end_date, "%d/%m/%Y")
         covid_19_df = covid_19_df[covid_19_df["Date_reported"] <= end_date]
-    dates = covid_19_df["Date_reported"].dt.strftime("%d/%m/%Y")
-
+    dates = list(covid_19_df["Date_reported"].dt.strftime("%d/%m/%Y"))
     # Get data for each plot
     cases = covid_19_df["New_cases"]
     cum_infections = covid_19_df["Cumulative_cases"]
@@ -51,6 +50,7 @@ def plot_from_df(covid_19_df, title, output_png_path, start_date=None, end_date=
         outcome_data, label = plot_data[i]
         ax.plot(dates, outcome_data, color="red", linewidth=1.1)
         ax.set_title(label)
+        ax.set_xlim([dates[0], dates[-1]])
         ax.set_ylim([0, 1.2*max(outcome_data)])
         ax.xaxis.set_major_locator(mdates.DayLocator(interval=14))
         ax.tick_params(axis='x', labelrotation=45, labelsize=8)
