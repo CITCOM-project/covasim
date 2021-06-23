@@ -4,12 +4,14 @@ Feature: Intervention
   describe expected effect of the interventions on the cumulative number of infections.
 
   Background:
+    # Does every `Given` have to be followed by "the"? I'd rather it was "Given that..."
     Given the every simulation is executed with at least the following default input parameters:
     * a population of 50,000
     * in the UK
     * with 100 initial infectious people
     * starting on June 1st 2021
     * ending on September 1st 2021
+    # Given that every `Then` clause involves the cumulative number of infections, I'm not sure we need this bit...
     And the reports the following outputs:
     * cumulative number of infections
 
@@ -66,4 +68,3 @@ Feature: Intervention
     * any probability of tracing a contact from the community
     When the simulation is complete
     Then the cumulative number of infections should be = baseline
-
