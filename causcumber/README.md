@@ -10,6 +10,14 @@ The scenarios directory contains different example scenarios implemented in the 
 3. To install the necessary requirements, in the root directory (`./covasim`), run `pip install -r requirements.txt`
 4. To install the necessary testing requirements, in the tests directory (`./covasim/tests`), run `pip install -r requirements_test.txt`
 
+## Proposed Causcumber workflow
+1. Create a `.feature` file specifying desired causal properties as scenarios in Gherkin language
+2. Transform each scenario into a causal question
+3. Infer a causal DAG baseline from each scenario - the user may need to correct this
+4. Run the system to get data for each causal question
+   >This is why I'd like to have the scenarios in each feature file use the same DAG. If we make this assumption, we can then use the scenarios to direct the exact runs of the model so we can test multiple scenarios with the same data. If we only test one scenario, we can effectively do an RCT. We could, I guess, only change the parameters according to the scenarios.
+5. Write hooks into the data with Cucumber and use doWhy to calculate causal estimates for each scenario and check that these match the specified behaviour in the `Then` clauses
+
 ## Results Format
 We work with CSV files produced by the simulations. These have 164 columns, the headings of which is as follows:
 - `t` (time step)
