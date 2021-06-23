@@ -61,7 +61,7 @@ def plot_from_df(covid_19_df, title, output_png_path, start_date=None, end_date=
     fig.suptitle(title)
     fig.tight_layout()
     fig.show()
-    fig.savefig(output_png_path, dpi=400, format="png")
+    fig.savefig(output_png_path, dpi=300, format="png")
 
 
 if __name__ == "__main__":
