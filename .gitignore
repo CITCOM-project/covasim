@@ -147,3 +147,6 @@ causcumber/causcumber/
 
 # Causcumber results
 causcumber/scenarios/*/results/
+
+# .DS_Store
+*/.DS_Store
