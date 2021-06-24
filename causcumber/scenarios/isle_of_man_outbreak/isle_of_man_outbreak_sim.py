@@ -19,7 +19,7 @@ isle_of_man_outbreak_pars = dict(
 
 # Define interventions
 testing_intervention = cv.test_prob(symp_prob=0.2, asymp_prob=0.001, symp_quar_prob=1.0, asymp_quar_prob=1.0)
-contact_tracing_intervention = cv.contact_tracing(trace_probs=dict(h=1.0, s=0.5, w=0.5, c=0.3))
+contact_tracing_intervention = cv.contact_tracing(trace_probs=dict(h=1.0, s=0.5, w=0.5, c=0.3), start_day="2020-05-28")
 
 # Create simulations
 baseline_sim = cv.Sim(pars=isle_of_man_outbreak_pars, label="Baseline")
