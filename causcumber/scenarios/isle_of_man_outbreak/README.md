@@ -6,5 +6,18 @@ COVID-19 data for the Isle of Man.
 ![Isle of Man COVID-19 Cases and Deaths](data/true_isle_of_man_pandemic.png)
 
 We will create a simulation of the COVID-19 pandemic between the 1st February 2021 and 30th April 2021 and
-see whether the predicted outcomes match the true data.
+see whether the predicted outcomes match the true data. To achieve this, we will create a Covasim MultiSim and run this
+10 times with the following parameters:
+- Location: UK (No Isle of Man, UK is closest)
+- Start day: 2021-02-01 (Year-Month-Day)
+- End day: 2021-04-30 (Year-Month-Day)
+- Population type: Hybrid (Allows modelling of agent contacts in different environments including schools and workplace)
+- Population size: 84584 (Isle of Man population from 2019)
 
+The figures below show the results of this MultiSim:
+
+![Isle of Man Predicted COVID-19 Cases and Deaths](data/predicted_isle_of_man_pandemic.png)
+
+If we focus on just contact tracing, we obtain the following figure:
+
+![Isle of Man Predicted COVID-19 Cases and Deaths (Contact Tracing Only)](data/predicted_isle_of_man_pandemic_contact_tracing.png)

@@ -42,7 +42,7 @@ def plot_from_df(covid_19_df, title, output_png_path, start_date=None, end_date=
                  (deaths, "New Deaths"), (cum_deaths, "Cumulative Deaths")]
 
     # Plot data
-    n_cols = 2
+    n_cols = 1
     n_rows = ceil(len(plot_data) / n_cols)
     fig, axes = plt.subplots(n_rows, n_cols)
 
