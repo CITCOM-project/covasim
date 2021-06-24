@@ -1,5 +1,5 @@
 import covasim as cv
-
+from datetime import datetime as dt
 
 def msim_to_csv(simulation: cv.MultiSim, output_file_name: str):
     """ Takes a MultiSim simulation, converts to a CSV file, and saves to ./results/ with the
@@ -7,19 +7,27 @@ def msim_to_csv(simulation: cv.MultiSim, output_file_name: str):
     simulation_df = simulation.base_sim.to_df()
     simulation_df.to_csv("./results/{}.csv".format(str.lower(output_file_name)), index=False)
 
+def days_between(d1, d2):
+    """ Given a pair of days in Year-Month-Day format, calculate the number of days between them. """
+    d1 = dt.strptime(d1, "%Y-%m-%d")
+    d2 = dt.strptime(d2, "%Y-%m-%d")
+    return abs((d2 - d1).days)
 
 """ Which intervention is more effective at reducing the cumulative number of infections? """
 isle_of_man_outbreak_pars = dict(
     location="UK",  # No Isle of Man, UK is closest
-    start_day="2021-02-01",
-    end_day="2021-04-30",
+    start_day="2020-01-03",
+    end_day="2021-06-22",
     pop_type="hybrid",
     pop_size=84584
 )
+contact_tracing_start_date = "2020-05-28"
+contact_tracing_start_day = days_between(contact_tracing_start_date, isle_of_man_outbreak_pars["start_day"])
 
 # Define interventions
 testing_intervention = cv.test_prob(symp_prob=0.2, asymp_prob=0.001, symp_quar_prob=1.0, asymp_quar_prob=1.0)
-contact_tracing_intervention = cv.contact_tracing(trace_probs=dict(h=1.0, s=0.5, w=0.5, c=0.3), start_day="2020-05-28")
+contact_tracing_intervention = cv.contact_tracing(trace_probs=dict(h=1.0, s=0.5, w=0.5, c=0.3),
+                                                  start_day=contact_tracing_start_day)
 
 # Create simulations
 baseline_sim = cv.Sim(pars=isle_of_man_outbreak_pars, label="Baseline")
